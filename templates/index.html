@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            background-color:#333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input, button {
+            font-size:1.1em;
+            padding:4px;
+            margin-bottom: 10px;
+            border:1px inset #333;
+            border-radius:4px;
+            margin-left:5px;
+        }
+
+        button {
+            background-color: #FF6600;
+            color: #fff;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #E65C00;
+        }
+
+        h2, p {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Lookup</h1>
+    <form method="post">
+        <input type="text" id="city" name="city" required placeholder="Enter City Name">
+        <button type="submit">Get Weather</button>
+    </form>
+    {% if weather_data %}
+        <h2>Weather in {{ request.form['city'] }}</h2>
+        <p>Temperature: {{ weather_data['temperature'] }}°C</p>
+        <p>Humidity: {{ weather_data['humidity'] }}%</p>
+        <p>Wind Speed: {{ weather_data['wind_speed'] }} m/s</p>
+        <p>Condition: {{ weather_data['description'] }}</p>
+    {% else %}
+    {% if not weather_data=="" %}<p style="color:red;font-weight:bold;background-color:#f1f1f1;">City not found or an issue occurred.</p>{% endif %}
+    {% endif %}
+
+</body>
+</html>
